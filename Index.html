@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tulsa Enterprises — Handmade Jewellery & Home Décor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            cream: '#FAF6EF',
+            beige: '#E9DDCC',
+            gold: '#B08D57',
+            brown: '#49372B',
+            charcoal: '#292622',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #FAF6EF; color: #292622; }
+    h1, h2, h3, h4, .font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+  </style>
+</head>
+<body class="antialiased selection:bg-beige selection:text-brown">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#FAF6EF]/95 backdrop-blur-md border-b border-beige">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="#hero" class="block">
+        <span class="font-serif text-2xl sm:text-3xl font-semibold text-charcoal">Tulsa Enterprises</span>
+        <span class="block text-[10px] sm:text-xs tracking-widest uppercase text-brown/70 font-medium">Handmade Jewellery & Home Décor</span>
+      </a>
+      <button onclick="openCsvModal()" class="px-3 py-1.5 text-xs font-medium tracking-wider uppercase bg-white border border-gold text-charcoal hover:bg-cream">
+        Manage CSV
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative py-12 sm:py-20 bg-cream text-center border-b border-beige px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold font-medium mb-3">
+        <span class="w-6 h-px bg-gold/60"></span>
+        <span>Artisan Creations</span>
+        <span class="w-6 h-px bg-gold/60"></span>
+      </div>
+      <h1 class="font-serif text-4xl sm:text-5xl text-charcoal font-normal leading-tight">
+        Handmade with Care,<br>Chosen with Love
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-brown/85 font-light max-w-xl mx-auto leading-relaxed">
+        Discover distinctive handcrafted jewellery and artisanal home accents thoughtfully designed and shaped by hand.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <button onclick="setDepartment('jewellery')" class="w-full sm:w-auto px-6 py-3 bg-brown text-white text-xs font-medium tracking-widest uppercase hover:bg-charcoal transition-colors">
+          Explore Jewellery
+        </button>
+        <button onclick="setDepartment('home-decor')" class="w-full sm:w-auto px-6 py-3 bg-white text-charcoal text-xs font-medium tracking-widest uppercase border border-gold hover:bg-cream transition-colors">
+          Discover Home Décor
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalogue Section -->
+  <section id="catalogue" class="py-12 px-4 max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-beige pb-6 mb-8 gap-4">
+      <div>
+        <span id="dept-label" class="text-xs uppercase tracking-widest text-gold font-semibold">Artisan Catalogue</span>
+        <h2 id="dept-title" class="font-serif text-3xl text-charcoal font-normal">Complete Collection</h2>
+      </div>
+      <div class="flex items-center gap-1 p-1 bg-beige/50 border border-beige self-start">
+        <button onclick="setDepartment('all')" id="tab-all" class="px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase bg-white text-charcoal border border-gold/40 shadow-xs">All</button>
+        <button onclick="setDepartment('jewellery')" id="tab-jewellery" class="px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase text-brown hover:text-charcoal">Jewellery</button>
+        <button onclick="setDepartment('home-decor')" id="tab-home-decor" class="px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase text-brown hover:text-charcoal">Home Décor</button>
+      </div>
+    </div>
+
+    <!-- Filters Bar -->
+    <div class="bg-white border border-beige p-4 mb-8 grid grid-cols-1 md:grid-cols-12 gap-3 text-xs">
+      <div class="md:col-span-5">
+        <input type="text" id="search-input" oninput="renderCatalogue()" placeholder="Search pieces by name, material, keyword..." class="w-full px-3 py-2 bg-cream/70 border border-beige focus:outline-none focus:border-gold">
+      </div>
+      <div class="md:col-span-4 flex items-center gap-2">
+        <span class="text-brown/70 shrink-0 font-medium">Category:</span>
+        <select id="category-select" onchange="renderCatalogue()" class="w-full px-3 py-2 bg-cream/70 border border-beige focus:outline-none focus:border-gold">
+          <option value="all">All Categories</option>
+        </select>
+      </div>
+      <div class="md:col-span-3 flex items-center gap-2">
+        <span class="text-brown/70 shrink-0 font-medium">Sort:</span>
+        <select id="sort-select" onchange="renderCatalogue()" class="w-full px-3 py-2 bg-cream/70 border border-beige focus:outline-none focus:border-gold">
+          <option value="featured">Featured First</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name-asc">Name: A to Z</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+    <div id="empty-state" class="hidden py-16 bg-white border border-beige text-center p-6">
+      <h3 class="font-serif text-xl font-medium text-charcoal">No matching pieces found</h3>
+      <button onclick="clearFilters()" class="mt-4 px-5 py-2 bg-brown text-white text-xs uppercase tracking-wider">Reset Filters</button>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 bg-white border-t border-b border-beige px-4 text-center">
+    <div class="max-w-3xl mx-auto">
+      <span class="text-xs uppercase tracking-widest text-gold font-semibold">Our Story</span>
+      <h2 class="font-serif text-3xl text-charcoal font-normal mt-1">About Tulsa Enterprises</h2>
+      <div class="w-10 h-0.5 bg-gold mx-auto my-4"></div>
+      <p class="text-sm text-brown/85 font-light leading-relaxed">
+        At Tulsa Enterprises, we celebrate the quiet beauty of authentic handcrafting. Our collection brings together artisan handmade jewellery and handcrafted home accents—from traditional brass filigree and earthen minerals to carved wood bowls, hand-thrown clay vases, and woven textiles.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-cream px-4 text-center">
+    <div class="max-w-xl mx-auto">
+      <span class="text-xs uppercase tracking-widest text-gold font-semibold">Orders & Enquiries</span>
+      <h2 class="font-serif text-3xl text-charcoal font-normal mt-1">Contact Tulsa Enterprises</h2>
+      <p class="text-xs text-brown/80 mt-2">
+        We welcome bespoke commissions, customization questions, and order inquiries.
+      </p>
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a id="email-btn" href="mailto:contact@tulsaenterprises.com?subject=Enquiry%20for%20Tulsa%20Enterprises" class="w-full sm:w-auto px-6 py-3 bg-brown text-white text-xs uppercase tracking-wider hover:bg-charcoal">
+          Enquire by Email
+        </a>
+      </div>
+      <p class="text-[11px] text-brown/60 mt-3">
+        Note: Clicking email opens your default email app with prefilled details.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-charcoal text-cream py-8 px-4 text-center text-xs">
+    <p class="font-serif text-xl text-white">Tulsa Enterprises</p>
+    <p class="text-beige/70 text-[11px] mt-1">Handmade Jewellery & Home Décor</p>
+    <p class="text-beige/50 text-[11px] mt-4">© <span id="year"></span> Tulsa Enterprises. All rights reserved.</p>
+  </footer>
+
+  <!-- Product Detail Modal -->
+  <div id="detail-modal" class="hidden fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto" onclick="closeModal()">
+    <div class="bg-white border border-beige max-w-2xl w-full p-6 relative my-auto" onclick="event.stopPropagation()">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal text-2xl">×</button>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="aspect-square bg-cream border border-beige overflow-hidden">
+          <img id="modal-img" src="" alt="" class="h-full w-full object-cover">
+        </div>
+        <div class="flex flex-col justify-between">
+          <div>
+            <span id="modal-cat" class="text-[10px] uppercase tracking-widest text-gold font-semibold"></span>
+            <h3 id="modal-title" class="font-serif text-2xl text-charcoal font-medium mt-1"></h3>
+            <p id="modal-price" class="text-xl font-semibold text-brown mt-2"></p>
+            <p id="modal-desc" class="text-xs text-brown/80 mt-3 leading-relaxed whitespace-pre-line"></p>
+            <div id="modal-specs" class="mt-4 text-xs space-y-1 text-brown/70 border-t border-cream pt-2"></div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-beige">
+            <a id="modal-enquire-btn" href="#" class="block text-center w-full py-2.5 bg-brown text-white text-xs uppercase tracking-wider hover:bg-charcoal">
+              Enquire About This Piece
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CSV Modal -->
+  <div id="csv-modal" class="hidden fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto" onclick="closeCsvModal()">
+    <div class="bg-white border border-beige max-w-lg w-full p-6 relative my-auto text-xs space-y-4" onclick="event.stopPropagation()">
+      <button onclick="closeCsvModal()" class="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal text-xl font-bold">×</button>
+      <h3 class="font-serif text-xl font-medium text-charcoal">Manage Catalogue (CSV)</h3>
+      <p class="text-brown/75 leading-relaxed">
+        Edit products in Excel, save as <strong>CSV UTF-8</strong>, and upload here.
+      </p>
+      <div class="grid grid-cols-2 gap-2 pt-2">
+        <button onclick="downloadTemplateCsv()" class="p-2.5 bg-cream border border-beige text-charcoal text-center hover:bg-white">
+          Download CSV Template
+        </button>
+        <button onclick="exportCurrentCsv()" class="p-2.5 bg-cream border border-beige text-charcoal text-center hover:bg-white">
+          Export Current Catalogue
+        </button>
+      </div>
+      <div class="border-2 border-dashed border-beige p-4 text-center bg-cream/40">
+        <input type="file" id="csv-file-input" accept=".csv" onchange="handleCsvUpload(event)" class="text-xs text-brown/80">
+      </div>
+      <div id="csv-status" class="text-[11px] text-brown/70"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 'JW-01',
+        name: '[DEMO] Handcrafted Brass Filigree Earrings',
+        category: 'Earrings',
+        dept: 'jewellery',
+        price_inr: 1450,
+        short_description: 'Artisan drop earrings shaped from warm brass with wire filigree.',
+        description: '[DEMONSTRATION RECORD] Intricate filigree drop earrings handcrafted by skilled brass artisans using ancestral wiring methods. Lightweight and hypoallergenic hooks.',
+        image_url: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=800&q=80',
+        material: 'Natural Brass with protective coat',
+        dimensions: '5.5 cm x 2.2 cm',
+        care_instructions: 'Keep away from water and perfume. Wipe clean with dry soft cloth.',
+        availability: 'In Stock',
+        featured: true
+      },
+      {
+        id: 'JW-02',
+        name: '[DEMO] Raw Amber & Brass Pendant Necklace',
+        category: 'Necklaces',
+        dept: 'jewellery',
+        price_inr: 2150,
+        short_description: 'Earthy pendant necklace featuring natural hand-cut amber stone.',
+        description: '[DEMONSTRATION RECORD] Mineral beauty set in a brushed brass bezel on an adjustable link chain.',
+        image_url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80',
+        material: 'Natural Amber, Raw Brass',
+        dimensions: '45 cm chain length',
+        care_instructions: 'Avoid dropping on hard surfaces. Store separately.',
+        availability: 'In Stock',
+        featured: true
+      },
+      {
+        id: 'JW-03',
+        name: '[DEMO] Hammered Pure Copper Cuff Bracelet',
+        category: 'Bracelets',
+        dept: 'jewellery',
+        price_inr: 950,
+        short_description: 'Minimalist open-cuff bracelet hand-shaped with textured facets.',
+        description: '[DEMONSTRATION RECORD] Hand-beaten solid copper cuff reflecting light across rustic facets.',
+        image_url: 'https://images.unsplash.com/photo-1611591475152-478311382490?auto=format&fit=crop&w=800&q=80',
+        material: 'Solid Pure Copper',
+        dimensions: '6.2 cm diameter (flexible)',
+        care_instructions: 'Restore bright shine with lemon and salt or jewellery cloth.',
+        availability: 'In Stock',
+        featured: false
+      },
+      {
+        id: 'HD-01',
+        name: '[DEMO] Hand-Carved Teakwood Decorative Bowl',
+        category: 'Decorative Pieces',
+        dept: 'home-decor',
+        price_inr: 2200,
+        short_description: 'Sculpted centerpiece bowl from reclaimed teakwood.',
+        description: '[DEMONSTRATION RECORD] Hand-turned display bowl highlighting rich natural wood grain. Perfect for coffee tables.',
+        image_url: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80',
+        material: 'Seasoned Reclaimed Teakwood',
+        dimensions: '26 cm diameter x 8.5 cm height',
+        care_instructions: 'Wipe with soft lint-free cloth. Not for liquids.',
+        availability: 'In Stock',
+        featured: true
+      },
+      {
+        id: 'HD-02',
+        name: '[DEMO] Woven Macramé & Driftwood Wall Hanging',
+        category: 'Wall Décor',
+        dept: 'home-decor',
+        price_inr: 1650,
+        short_description: 'Artisan tapestry hand-knotted from unbleached natural cotton.',
+        description: '[DEMONSTRATION RECORD] Bohemian geometric wall art suspended from hand-finished wood.',
+        image_url: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
+        material: '100% Natural Cotton, Natural Wood',
+        dimensions: '45 cm width x 70 cm height',
+        care_instructions: 'Shake gently to remove dust.',
+        availability: 'In Stock',
+        featured: true
+      },
+      {
+        id: 'HD-03',
+        name: '[DEMO] Hand-Painted Terracotta Table Vase',
+        category: 'Table Décor',
+        dept: 'home-decor',
+        price_inr: 1250,
+        short_description: 'Earthy clay vase thrown on the wheel with fluted texture.',
+        description: '[DEMONSTRATION RECORD] Hand-thrown terracotta with organic mineral pigments for dried florals.',
+        image_url: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=80',
+        material: 'Terracotta Clay',
+        dimensions: '22 cm height x 14 cm diameter',
+        care_instructions: 'Dry arrangements only.',
+        availability: 'In Stock',
+        featured: false
+      }
+    ];
+
+    let currentDept = 'all';
+    let products = [];
+
+    try {
+      const stored = localStorage.getItem('tulsa_mobile_products');
+      products = stored ? JSON.parse(stored) : DEFAULT_PRODUCTS;
+    } catch(e) {
+      products = DEFAULT_PRODUCTS;
+    }
+
+    function setDepartment(dept) {
+      currentDept = dept;
+      document.querySelectorAll('#tab-all, #tab-jewellery, #tab-home-decor').forEach(b => {
+        b.className = 'px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase text-brown hover:text-charcoal';
+      });
+      const activeBtn = document.getElementById('tab-' + dept);
+      if (activeBtn) {
+        activeBtn.className = 'px-3.5 py-1.5 text-xs font-medium tracking-wider uppercase bg-white text-charcoal border border-gold/40 shadow-xs font-semibold';
+      }
+      
+      const label = document.getElementById('dept-label');
+      const title = document.getElementById('dept-title');
+      if (dept === 'jewellery') {
+        label.textContent = 'Handcrafted Jewellery';
+        title.textContent = 'Jewellery Pieces';
+      } else if (dept === 'home-decor') {
+        label.textContent = 'Artisan Home Décor';
+        title.textContent = 'Home Accents';
+      } else {
+        label.textContent = 'Artisan Catalogue';
+        title.textContent = 'Complete Collection';
+      }
+      populateCategories();
+      renderCatalogue();
+      document.getElementById('catalogue').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function populateCategories() {
+      const select = document.getElementById('category-select');
+      const cats = new Set();
+      products.forEach(p => {
+        if (currentDept === 'all' || p.dept === currentDept || (currentDept === 'jewellery' && ['Earrings', 'Necklaces', 'Bracelets', 'Rings'].includes(p.category)) || (currentDept === 'home-decor' && !['Earrings', 'Necklaces', 'Bracelets', 'Rings'].includes(p.category))) {
+          cats.add(p.category);
+        }
+      });
+      select.innerHTML = '<option value="all">All Categories</option>';
+      cats.forEach(c => {
+        select.innerHTML += `<option value="${c}">${c}</option>`;
+      });
+    }
+
+    function renderCatalogue() {
+      const query = (document.getElementById('search-input').value || '').toLowerCase();
+      const selectedCat = document.getElementById('category-select').value;
+      const sortBy = document.getElementById('sort-select').value;
+      const grid = document.getElementById('product-grid');
+      const empty = document.getElementById('empty-state');
+
+      let list = products.filter(p => {
+        const isJ = ['Earrings', 'Necklaces', 'Bracelets', 'Rings'].includes(p.category) || p.dept === 'jewellery';
+        if (currentDept === 'jewellery' && !isJ) return false;
+        if (currentDept === 'home-decor' && isJ) return false;
+        if (selectedCat !== 'all' && p.category !== selectedCat) return false;
+        if (query) {
+          const match = p.name.toLowerCase().includes(query) || (p.description || '').toLowerCase().includes(query) || (p.material || '').toLowerCase().includes(query) || p.category.toLowerCase().includes(query);
+          if (!match) return false;
+        }
+        return true;
+      });
+
+      if (sortBy === 'price-asc') list.sort((a,b) => a.price_inr - b.price_inr);
+      else if (sortBy === 'price-desc') list.sort((a,b) => b.price_inr - a.price_inr);
+      else if (sortBy === 'name-asc') list.sort((a,b) => a.name.localeCompare(b.name));
+      else list.sort((a,b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+
+      if (list.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+
+      grid.innerHTML = list.map(p => `
+        <article class="bg-white border border-beige hover:border-gold transition-colors flex flex-col">
+          <div class="relative aspect-square bg-cream overflow-hidden cursor-pointer" onclick="openProductModal('${p.id}')">
+            <img src="${p.image_url}" alt="${p.name}" class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80'">
+            ${p.featured ? '<span class="absolute top-2 left-2 bg-cream/90 border border-gold/40 text-[10px] uppercase tracking-wider px-2 py-0.5 font-medium text-brown">Featured</span>' : ''}
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="text-[11px] uppercase tracking-wider text-gold font-medium">${p.category}</div>
+              <h3 class="font-serif text-lg font-medium text-charcoal mt-1 line-clamp-1 cursor-pointer" onclick="openProductModal('${p.id}')">${p.name}</h3>
+              <p class="text-base font-semibold text-brown mt-1">₹${Number(p.price_inr).toLocaleString('en-IN')}</p>
+              <p class="text-xs text-brown/70 mt-1 line-clamp-2 leading-relaxed">${p.short_description || p.description}</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-beige/60 flex items-center justify-between">
+              <button onclick="openProductModal('${p.id}')" class="text-xs text-brown font-medium underline underline-offset-4 decoration-gold/50">View Details</button>
+              <a href="mailto:contact@tulsaenterprises.com?subject=Enquiry:%20${encodeURIComponent(p.name)}%20(${p.id})&body=Hello%20Tulsa%20Enterprises,%0A%0AI%20am%20interested%20in%20${encodeURIComponent(p.name)}%20(Price:%20₹${p.price_inr}).%0A%0APlease%20let%20me%20know%20availability%20and%20ordering%20details." class="text-xs text-gold font-semibold hover:text-brown">Enquire</a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function openProductModal(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById('modal-img').src = p.image_url;
+      document.getElementById('modal-cat').textContent = p.category;
+      document.getElementById('modal-title').textContent = p.name;
+      document.getElementById('modal-price').textContent = '₹' + Number(p.price_inr).toLocaleString('en-IN');
+      document.getElementById('modal-desc').textContent = p.description || p.short_description;
+      
+      let specs = '';
+      if (p.material) specs += `<div><strong>Material:</strong> ${p.material}</div>`;
+      if (p.dimensions) specs += `<div><strong>Dimensions:</strong> ${p.dimensions}</div>`;
+      if (p.care_instructions) specs += `<div><strong>Care:</strong> ${p.care_instructions}</div>`;
+      if (p.availability) specs += `<div><strong>Availability:</strong> ${p.availability}</div>`;
+      document.getElementById('modal-specs').innerHTML = specs;
+
+      document.getElementById('modal-enquire-btn').href = `mailto:contact@tulsaenterprises.com?subject=Enquiry:%20${encodeURIComponent(p.name)}%20(${p.id})&body=Hello%20Tulsa%20Enterprises,%0A%0AI%20would%20like%20to%20enquire%20about%20${encodeURIComponent(p.name)}%20(Price:%20₹${p.price_inr}).%0A%0AThank%20you!`;
+      document.getElementById('detail-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('detail-modal').classList.add('hidden');
+    }
+
+    function clearFilters() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('category-select').value = 'all';
+      setDepartment('all');
+    }
+
+    function openCsvModal() {
+      document.getElementById('csv-modal').classList.remove('hidden');
+    }
+
+    function closeCsvModal() {
+      document.getElementById('csv-modal').classList.add('hidden');
+    }
+
+    function downloadTemplateCsv() {
+      const csv = '\uFEFFid,name,category,price_inr,short_description,description,image_url,material,dimensions,care_instructions,availability,featured\r\n' +
+        'JW-01,[DEMO] Handcrafted Brass Filigree Earrings,Earrings,1450,"Traditional brass earrings","Artisan filigree wire work","https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=800&q=80",Brass,5.5 cm,Dry wipe,In Stock,TRUE\r\n' +
+        'HD-01,[DEMO] Hand-Carved Teakwood Bowl,Decorative Pieces,2200,"Turned wood centerpiece bowl","Reclaimed teakwood bowl","https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80",Teakwood,26 cm,Dust dry,In Stock,TRUE\r\n';
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'products-template.csv';
+      a.click();
+    }
+
+    function exportCurrentCsv() {
+      let csv = '\uFEFFid,name,category,price_inr,short_description,description,image_url,material,dimensions,care_instructions,availability,featured\r\n';
+      products.forEach(p => {
+        csv += `"${p.id}","${p.name}","${p.category}",${p.price_inr},"${p.short_description || ''}","${p.description || ''}","${p.image_url || ''}","${p.material || ''}","${p.dimensions || ''}","${p.care_instructions || ''}","${p.availability || ''}",${p.featured ? 'TRUE' : 'FALSE'}\r\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'tulsa-catalogue-export.csv';
+      a.click();
+    }
+
+    function handleCsvUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const text = evt.target.result;
+        const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+        if (lines.length <= 1) return;
+        const newProducts = [];
+        for (let i = 1; i < lines.length; i++) {
+          const parts = lines[i].split(',').map(s => s.replace(/^"|"$/g, '').trim());
+          if (parts[0] && parts[1] && parts[3]) {
+            newProducts.push({
+              id: parts[0],
+              name: parts[1],
+              category: parts[2] || 'Artisan Piece',
+              dept: ['Earrings','Necklaces','Bracelets','Rings'].includes(parts[2]) ? 'jewellery' : 'home-decor',
+              price_inr: Number(parts[3]) || 0,
+              short_description: parts[4] || '',
+              description: parts[5] || parts[4] || '',
+              image_url: parts[6] || 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80',
+              material: parts[7] || '',
+              dimensions: parts[8] || '',
+              care_instructions: parts[9] || '',
+              availability: parts[10] || 'In Stock',
+              featured: parts[11] === 'TRUE'
+            });
+          }
+        }
+        if (newProducts.length > 0) {
+          products = newProducts;
+          localStorage.setItem('tulsa_mobile_products', JSON.stringify(products));
+          populateCategories();
+          renderCatalogue();
+          document.getElementById('csv-status').textContent = `Imported ${newProducts.length} products!`;
+          setTimeout(() => closeCsvModal(), 1200);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    populateCategories();
+    renderCatalogue();
+  </script>
+</body>
+</html>
