@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tulsa Enterprises — Handmade Jewellery & Home Décor</title>
+  <meta name="description" content="Artisanal catalogue showcasing handmade jewellery and home décor crafted with care.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -28,36 +29,95 @@
     }
   </script>
   <style>
-    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #FAF6EF; color: #292622; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; transition: background 0.3s ease, color 0.3s ease; }
     h1, h2, h3, h4, .font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    /* 1. Kalamkari & Jaipur Hand-Block Print */
+    body.theme-kalamkari {
+      background-color: #FAF6EF;
+      color: #292622;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23B08D57' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M40 8c4.4 0 8 3.6 8 8 0 6.5-8 14-8 14s-8-7.5-8-14c0-4.4 3.6-8 8-8zm0 40c4.4 0 8 3.6 8 8 0 6.5-8 14-8 14s-8-7.5-8-14c0-4.4 3.6-8 8-8zM0 8c4.4 0 8 3.6 8 8 0 6.5-8 14-8 14s-8-7.5-8-14c0-4.4 3.6-8 8-8zm80 0c4.4 0 8 3.6 8 8 0 6.5-8 14-8 14s-8-7.5-8-14c0-4.4 3.6-8 8-8zM0 48c4.4 0 8 3.6 8 8 0 6.5-8 14-8 14s-8-7.5-8-14c0-4.4 3.6-8 8-8zm80 0c4.4 0 8 3.6 8 8 0 6.5-8 14-8 14s-8-7.5-8-14c0-4.4 3.6-8 8-8zM20 28a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm40 0a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm-40 40a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm40 0a4 4 0 1 1 0 8 4 4 0 0 1 0-8z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* 2. Mughal Royal Jali Lattice (Dark Palace Lounge) */
+    body.theme-jali {
+      background-color: #1A1613;
+      color: #FAF6EF;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M30 30L15 45H0v-15L15 15 0 0h15l15 15L45 0h15v15L45 30l15 15v15H45L30 45zm0-30L15 15 30 30 45 15 30 0zm0 60L15 45 30 30 45 45 30 60z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    body.theme-jali header { background-color: rgba(26, 22, 19, 0.95); border-color: #3D3328; }
+    body.theme-jali #hero { background-color: #1E1A16; border-color: #3D3328; }
+    body.theme-jali h1, body.theme-jali h2, body.theme-jali h3, body.theme-jali h4, body.theme-jali .font-serif { color: #FAF6EF; }
+    body.theme-jali p { color: #D6C9B8; }
+    body.theme-jali article { background-color: #241F1A; border-color: #44382B; }
+    body.theme-jali article:hover { border-color: #D4AF37; }
+    body.theme-jali #about { background-color: #1E1A16; border-color: #3D3328; }
+    body.theme-jali #contact { background-color: #1A1613; }
+    body.theme-jali .bg-white { background-color: #241F1A !important; border-color: #44382B !important; color: #FAF6EF !important; }
+    body.theme-jali input, body.theme-jali select { background-color: #1E1A16 !important; border-color: #44382B !important; color: #FAF6EF !important; }
+
+    /* 3. Earthen Terracotta & Ajrakh Star Block */
+    body.theme-terracotta {
+      background-color: #F7EEE5;
+      color: #2C1A14;
+      background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23BA5D38' fill-opacity='0.09' fill-rule='evenodd'%3E%3Cpath d='M32 0l8 12 12-8 4 14 14 4-8 12 12 8-12 8 8 12-14 4-4 14-12-8-8 12-8-12-12 8-4-14-14-4 8-12-12-8 12-8-8-12 14-4 4-14 12 8zM32 20a12 12 0 1 0 0 24 12 12 0 0 0 0-24z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* 4. Chanderi Silk & Sacred Lotus */
+    body.theme-chanderi {
+      background-color: #FCF9F4;
+      color: #2A2421;
+      background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 72 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C07A55' fill-opacity='0.07' fill-rule='evenodd'%3E%3Cpath d='M36 12c-4 10-14 14-14 20 0 7.7 6.3 14 14 14s14-6.3 14-14c0-6-10-10-14-20zm0 4a10 10 0 1 1 0 20 10 10 0 0 1 0-20zM0 48c4 4 10 4 14 0 4-4 4-10 0-14-4-4-10-4-14 0-4 4-4 10 0 14zm72 0c4 4 10 4 14 0 4-4 4-10 0-14-4-4-10-4-14 0-4 4-4 10 0 14z'/%3E%3C/g%3E%3C/svg%3E");
+    }
   </style>
 </head>
-<body class="antialiased selection:bg-beige selection:text-brown">
+<body class="theme-kalamkari antialiased selection:bg-beige selection:text-brown">
 
   <!-- Header -->
   <header class="sticky top-0 z-40 bg-[#FAF6EF]/95 backdrop-blur-md border-b border-beige">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="#hero" class="block">
-        <span class="font-serif text-2xl sm:text-3xl font-semibold text-charcoal">Tulsa Enterprises</span>
-        <span class="block text-[10px] sm:text-xs tracking-widest uppercase text-brown/70 font-medium">Handmade Jewellery & Home Décor</span>
-      </a>
-      <button onclick="openCsvModal()" class="px-3 py-1.5 text-xs font-medium tracking-wider uppercase bg-white border border-gold text-charcoal hover:bg-cream">
-        Manage CSV
-      </button>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <div>
+        <a href="#hero" class="block">
+          <span class="font-serif text-2xl sm:text-3xl font-semibold text-charcoal">Tulsa Enterprises</span>
+          <span class="block text-[10px] sm:text-xs tracking-widest uppercase text-brown/70 font-medium">Handmade Jewellery & Home Décor</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-2">
+        <!-- Kalakari Theme Switcher Dropdown -->
+        <select id="theme-selector" onchange="changeTheme(this.value)" class="px-2.5 py-1.5 bg-white border border-gold text-charcoal text-[11px] font-medium tracking-wide focus:outline-none">
+          <option value="theme-kalamkari">🌸 Jaipur Kalamkari</option>
+          <option value="theme-jali">🕌 Mughal Jali (Dark)</option>
+          <option value="theme-terracotta">🏺 Earthen Ajrakh</option>
+          <option value="theme-chanderi">🪷 Chanderi Lotus</option>
+        </select>
+        <button onclick="openCsvModal()" class="px-3 py-1.5 text-xs font-medium tracking-wider uppercase bg-white border border-gold text-charcoal hover:bg-cream">
+          Manage CSV
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section id="hero" class="relative py-12 sm:py-20 bg-cream text-center border-b border-beige px-4">
+  <!-- Hero Section with Indian Kalakari Motif -->
+  <section id="hero" class="relative py-14 sm:py-20 text-center border-b border-beige px-4">
     <div class="max-w-3xl mx-auto">
-      <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold font-medium mb-3">
-        <span class="w-6 h-px bg-gold/60"></span>
-        <span>Artisan Creations</span>
-        <span class="w-6 h-px bg-gold/60"></span>
+      <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold font-medium mb-2">
+        <span class="w-8 h-px bg-gold/60"></span>
+        <span>Artisan Kalakari</span>
+        <span class="w-8 h-px bg-gold/60"></span>
       </div>
       <h1 class="font-serif text-4xl sm:text-5xl text-charcoal font-normal leading-tight">
         Handmade with Care,<br>Chosen with Love
       </h1>
+
+      <!-- Traditional Indian Paisley / Lotus Motif -->
+      <div class="flex items-center justify-center gap-3 my-4">
+        <span class="w-14 h-px bg-gold/50"></span>
+        <svg class="w-5 h-5 text-gold inline-block" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2c-2.5 3.5-5 7-5 11 0 2.8 2.2 5 5 5s5-2.2 5-5c0-4-2.5-7.5-5-11zm0 6a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" opacity="0.85"/>
+        </svg>
+        <span class="w-14 h-px bg-gold/50"></span>
+      </div>
+
       <p class="mt-4 text-sm sm:text-base text-brown/85 font-light max-w-xl mx-auto leading-relaxed">
         Discover distinctive handcrafted jewellery and artisanal home accents thoughtfully designed and shaped by hand.
       </p>
@@ -74,6 +134,7 @@
 
   <!-- Catalogue Section -->
   <section id="catalogue" class="py-12 px-4 max-w-7xl mx-auto">
+    <!-- Department Tabs & Title -->
     <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-beige pb-6 mb-8 gap-4">
       <div>
         <span id="dept-label" class="text-xs uppercase tracking-widest text-gold font-semibold">Artisan Catalogue</span>
@@ -111,6 +172,7 @@
     <!-- Product Grid -->
     <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
 
+    <!-- Empty State -->
     <div id="empty-state" class="hidden py-16 bg-white border border-beige text-center p-6">
       <h3 class="font-serif text-xl font-medium text-charcoal">No matching pieces found</h3>
       <button onclick="clearFilters()" class="mt-4 px-5 py-2 bg-brown text-white text-xs uppercase tracking-wider">Reset Filters</button>
@@ -120,7 +182,7 @@
   <!-- About Section -->
   <section id="about" class="py-16 bg-white border-t border-b border-beige px-4 text-center">
     <div class="max-w-3xl mx-auto">
-      <span class="text-xs uppercase tracking-widest text-gold font-semibold">Our Story</span>
+      <span class="text-xs uppercase tracking-widest text-gold font-semibold">Our Story & Craft</span>
       <h2 class="font-serif text-3xl text-charcoal font-normal mt-1">About Tulsa Enterprises</h2>
       <div class="w-10 h-0.5 bg-gold mx-auto my-4"></div>
       <p class="text-sm text-brown/85 font-light leading-relaxed">
@@ -130,14 +192,14 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-16 bg-cream px-4 text-center">
-    <div class="max-w-xl mx-auto">
-      <span class="text-xs uppercase tracking-widest text-gold font-semibold">Orders & Enquiries</span>
+  <section id="contact" class="py-16 px-4 text-center">
+    <div class="max-w-4xl mx-auto">
+      <span class="text-xs uppercase tracking-widest text-gold font-semibold">Orders & Inquiries</span>
       <h2 class="font-serif text-3xl text-charcoal font-normal mt-1">Contact Tulsa Enterprises</h2>
-      <p class="text-xs text-brown/80 mt-2">
-        We welcome bespoke commissions, customization questions, and order inquiries.
+      <p class="text-xs text-brown/80 mt-2 max-w-md mx-auto">
+        We welcome bespoke commissions, customization questions, and order inquiries. Contact us via Instagram or direct email.
       </p>
-      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
         <a id="email-btn" href="mailto:contact@tulsaenterprises.com?subject=Enquiry%20for%20Tulsa%20Enterprises" class="w-full sm:w-auto px-6 py-3 bg-brown text-white text-xs uppercase tracking-wider hover:bg-charcoal">
           Enquire by Email
         </a>
@@ -149,18 +211,18 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-charcoal text-cream py-8 px-4 text-center text-xs">
+  <footer class="bg-charcoal text-cream py-10 px-4 text-center text-xs">
     <p class="font-serif text-xl text-white">Tulsa Enterprises</p>
     <p class="text-beige/70 text-[11px] mt-1">Handmade Jewellery & Home Décor</p>
-    <p class="text-beige/50 text-[11px] mt-4">© <span id="year"></span> Tulsa Enterprises. All rights reserved.</p>
+    <p class="text-beige/50 text-[11px] mt-6">© <span id="year"></span> Tulsa Enterprises. All rights reserved.</p>
   </footer>
 
   <!-- Product Detail Modal -->
   <div id="detail-modal" class="hidden fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto" onclick="closeModal()">
     <div class="bg-white border border-beige max-w-2xl w-full p-6 relative my-auto" onclick="event.stopPropagation()">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal text-2xl">×</button>
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal text-xl font-bold">×</button>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div class="aspect-square bg-cream border border-beige overflow-hidden">
+        <div class="aspect-square bg-cream border border-beige overflow-hidden flex items-center justify-center">
           <img id="modal-img" src="" alt="" class="h-full w-full object-cover">
         </div>
         <div class="flex flex-col justify-between">
@@ -181,13 +243,13 @@
     </div>
   </div>
 
-  <!-- CSV Modal -->
+  <!-- CSV Manager Modal -->
   <div id="csv-modal" class="hidden fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto" onclick="closeCsvModal()">
     <div class="bg-white border border-beige max-w-lg w-full p-6 relative my-auto text-xs space-y-4" onclick="event.stopPropagation()">
       <button onclick="closeCsvModal()" class="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal text-xl font-bold">×</button>
       <h3 class="font-serif text-xl font-medium text-charcoal">Manage Catalogue (CSV)</h3>
       <p class="text-brown/75 leading-relaxed">
-        Edit products in Excel, save as <strong>CSV UTF-8</strong>, and upload here.
+        Edit your catalogue in Microsoft Excel or LibreOffice Calc. Save as <strong>CSV UTF-8</strong> and import below.
       </p>
       <div class="grid grid-cols-2 gap-2 pt-2">
         <button onclick="downloadTemplateCsv()" class="p-2.5 bg-cream border border-beige text-charcoal text-center hover:bg-white">
@@ -204,8 +266,21 @@
     </div>
   </div>
 
+  <!-- App Logic Script -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme Switcher Logic
+    function changeTheme(themeName) {
+      document.body.className = themeName + ' antialiased selection:bg-beige selection:text-brown';
+      localStorage.setItem('tulsa_active_theme', themeName);
+    }
+    const savedTheme = localStorage.getItem('tulsa_active_theme');
+    if (savedTheme) {
+      document.body.className = savedTheme + ' antialiased selection:bg-beige selection:text-brown';
+      const sel = document.getElementById('theme-selector');
+      if (sel) sel.value = savedTheme;
+    }
 
     const DEFAULT_PRODUCTS = [
       {
@@ -383,7 +458,7 @@
       empty.classList.add('hidden');
 
       grid.innerHTML = list.map(p => `
-        <article class="bg-white border border-beige hover:border-gold transition-colors flex flex-col">
+        <article class="bg-white border border-beige hover:border-gold transition-colors flex flex-col shadow-xs">
           <div class="relative aspect-square bg-cream overflow-hidden cursor-pointer" onclick="openProductModal('${p.id}')">
             <img src="${p.image_url}" alt="${p.name}" class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80'">
             ${p.featured ? '<span class="absolute top-2 left-2 bg-cream/90 border border-gold/40 text-[10px] uppercase tracking-wider px-2 py-0.5 font-medium text-brown">Featured</span>' : ''}
