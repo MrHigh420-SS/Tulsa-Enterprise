@@ -73,7 +73,7 @@
 </head>
 <body class="theme-kalamkari antialiased selection:bg-beige selection:text-brown">
 
-  <!-- Header -->
+  <!-- Customer-Focused Header -->
   <header class="sticky top-0 z-40 bg-[#FAF6EF]/95 backdrop-blur-md border-b border-beige">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
       <div>
@@ -82,15 +82,26 @@
           <span class="block text-[10px] sm:text-xs tracking-widest uppercase text-brown/70 font-medium">Handmade Jewellery & Home Décor</span>
         </a>
       </div>
-      <div class="flex items-center gap-2">
-        <!-- Kalakari Theme Switcher Dropdown -->
-        <select id="theme-selector" onchange="changeTheme(this.value)" class="px-2.5 py-1.5 bg-white border border-gold text-charcoal text-[11px] font-medium tracking-wide focus:outline-none">
-          <option value="theme-kalamkari">🌸 Jaipur Kalamkari</option>
-          <option value="theme-jali">🕌 Mughal Jali (Dark)</option>
-          <option value="theme-terracotta">🏺 Earthen Ajrakh</option>
-          <option value="theme-chanderi">🪷 Chanderi Lotus</option>
-        </select>
-        <button onclick="openCsvModal()" class="px-3 py-1.5 text-xs font-medium tracking-wider uppercase bg-white border border-gold text-charcoal hover:bg-cream">
+      <div class="flex items-center gap-3">
+        <!-- Customer Navigation -->
+        <nav class="hidden md:flex items-center gap-5 text-xs font-medium tracking-wider uppercase text-brown">
+          <button onclick="setDepartment('jewellery')" class="hover:text-gold transition-colors">Jewellery</button>
+          <button onclick="setDepartment('home-decor')" class="hover:text-gold transition-colors">Home Décor</button>
+          <a href="#contact" class="hover:text-gold transition-colors">Contact</a>
+        </nav>
+
+        <!-- Kalakari Theme Switcher -->
+        <div class="relative inline-block text-xs">
+          <select id="theme-selector" onchange="changeTheme(this.value)" class="px-2.5 py-1.5 bg-white border border-gold text-charcoal text-[11px] font-medium tracking-wide focus:outline-none">
+            <option value="theme-kalamkari">🌸 Jaipur Kalamkari</option>
+            <option value="theme-jali">🕌 Mughal Jali (Dark)</option>
+            <option value="theme-terracotta">🏺 Earthen Ajrakh</option>
+            <option value="theme-chanderi">🪷 Chanderi Lotus</option>
+          </select>
+        </div>
+
+        <!-- Hidden from customers, visible only when visiting with ?admin -->
+        <button id="header-admin-btn" onclick="openCsvModal()" class="hidden px-2.5 py-1.5 text-[11px] font-medium tracking-wider uppercase bg-white border border-gold text-charcoal">
           Manage CSV
         </button>
       </div>
@@ -109,7 +120,6 @@
         Handmade with Care,<br>Chosen with Love
       </h1>
 
-      <!-- Traditional Indian Paisley / Lotus Motif -->
       <div class="flex items-center justify-center gap-3 my-4">
         <span class="w-14 h-px bg-gold/50"></span>
         <svg class="w-5 h-5 text-gold inline-block" viewBox="0 0 24 24" fill="currentColor">
@@ -134,7 +144,6 @@
 
   <!-- Catalogue Section -->
   <section id="catalogue" class="py-12 px-4 max-w-7xl mx-auto">
-    <!-- Department Tabs & Title -->
     <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-beige pb-6 mb-8 gap-4">
       <div>
         <span id="dept-label" class="text-xs uppercase tracking-widest text-gold font-semibold">Artisan Catalogue</span>
@@ -172,7 +181,6 @@
     <!-- Product Grid -->
     <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
 
-    <!-- Empty State -->
     <div id="empty-state" class="hidden py-16 bg-white border border-beige text-center p-6">
       <h3 class="font-serif text-xl font-medium text-charcoal">No matching pieces found</h3>
       <button onclick="clearFilters()" class="mt-4 px-5 py-2 bg-brown text-white text-xs uppercase tracking-wider">Reset Filters</button>
@@ -210,11 +218,29 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Clean Customer Footer with Discreet Store Manager Link -->
   <footer class="bg-charcoal text-cream py-10 px-4 text-center text-xs">
     <p class="font-serif text-xl text-white">Tulsa Enterprises</p>
     <p class="text-beige/70 text-[11px] mt-1">Handmade Jewellery & Home Décor</p>
-    <p class="text-beige/50 text-[11px] mt-6">© <span id="year"></span> Tulsa Enterprises. All rights reserved.</p>
+    
+    <div class="mt-4 flex items-center justify-center gap-4 text-[11px] text-beige/60">
+      <button onclick="setDepartment('jewellery')" class="hover:text-gold">Jewellery</button>
+      <span>·</span>
+      <button onclick="setDepartment('home-decor')" class="hover:text-gold">Home Décor</button>
+      <span>·</span>
+      <a href="#about" class="hover:text-gold">About</a>
+      <span>·</span>
+      <a href="#contact" class="hover:text-gold">Contact</a>
+    </div>
+
+    <div class="mt-6 pt-4 border-t border-beige/10 flex flex-col sm:flex-row items-center justify-between max-w-5xl mx-auto text-[11px] text-beige/40">
+      <p>© <span id="year"></span> Tulsa Enterprises. All rights reserved.</p>
+      
+      <!-- Discreet Owner Link for You -->
+      <button onclick="openCsvModal()" class="mt-2 sm:mt-0 text-[10px] text-beige/30 hover:text-gold transition-colors inline-flex items-center gap-1">
+        <span>🔒 Store Manager (CSV)</span>
+      </button>
+    </div>
   </footer>
 
   <!-- Product Detail Modal -->
@@ -243,13 +269,13 @@
     </div>
   </div>
 
-  <!-- CSV Manager Modal -->
+  <!-- CSV Modal -->
   <div id="csv-modal" class="hidden fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto" onclick="closeCsvModal()">
     <div class="bg-white border border-beige max-w-lg w-full p-6 relative my-auto text-xs space-y-4" onclick="event.stopPropagation()">
       <button onclick="closeCsvModal()" class="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal text-xl font-bold">×</button>
       <h3 class="font-serif text-xl font-medium text-charcoal">Manage Catalogue (CSV)</h3>
       <p class="text-brown/75 leading-relaxed">
-        Edit your catalogue in Microsoft Excel or LibreOffice Calc. Save as <strong>CSV UTF-8</strong> and import below.
+        Edit products in Excel, save as <strong>CSV UTF-8</strong>, and upload here.
       </p>
       <div class="grid grid-cols-2 gap-2 pt-2">
         <button onclick="downloadTemplateCsv()" class="p-2.5 bg-cream border border-beige text-charcoal text-center hover:bg-white">
@@ -266,9 +292,14 @@
     </div>
   </div>
 
-  <!-- App Logic Script -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Check if store owner opened with ?admin or #admin
+    if (window.location.search.includes('admin') || window.location.hash.includes('admin')) {
+      const btn = document.getElementById('header-admin-btn');
+      if (btn) btn.classList.remove('hidden');
+    }
 
     // Theme Switcher Logic
     function changeTheme(themeName) {
@@ -416,7 +447,8 @@
       const select = document.getElementById('category-select');
       const cats = new Set();
       products.forEach(p => {
-        if (currentDept === 'all' || p.dept === currentDept || (currentDept === 'jewellery' && ['Earrings', 'Necklaces', 'Bracelets', 'Rings'].includes(p.category)) || (currentDept === 'home-decor' && !['Earrings', 'Necklaces', 'Bracelets', 'Rings'].includes(p.category))) {
+        const isJ = ['Earrings', 'Necklaces', 'Bracelets', 'Rings'].includes(p.category) || p.dept === 'jewellery';
+        if (currentDept === 'all' || (currentDept === 'jewellery' && isJ) || (currentDept === 'home-decor' && !isJ)) {
           cats.add(p.category);
         }
       });
